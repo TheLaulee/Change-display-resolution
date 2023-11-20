@@ -1,0 +1,24 @@
+#include <windows.h>
+#include <process.h>
+#include "time.h"
+#include "math.h"
+#include "stdio.h"
+
+int WINAPI WinMain (HINSTANCE hThisInstance, HINSTANCE hPrevInstance,
+			LPSTR lpszArgument, int nFunsterStil) {
+
+    DEVMODE dm; 
+
+    EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dm);
+    if(dm.dmPelsHeight == 1080) {
+        dm.dmPelsHeight = 960;
+        dm.dmPelsWidth = 1280;
+    }
+    else {
+        dm.dmPelsHeight = 1080;
+        dm.dmPelsWidth = 1920; 
+    }
+    ChangeDisplaySettings(&dm, CDS_RESET);
+
+    return 0;
+}
